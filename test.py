@@ -5,13 +5,15 @@ from surprise import Reader
 from surprise import SVD
 from surprise import evaluate, print_perf
 
-reader = Reader(line_format='user item rating', sep='|')
 
-data = Dataset.load_from_file(r'H:\ratings.dat', reader)
-data.split(2)
+if __name__ == '__main__':
+    reader = Reader(line_format='user item rating', sep='|')
 
-algo = SVD()
+    data = Dataset.load_from_file('/home/binjie/ratings.dat', reader)
+    data.split(2)
 
-perf = evaluate(algo, data)
+    algo = SVD(n_factors=1000)
 
-print_perf(perf)
+    perf = evaluate(algo, data)
+
+    print_perf(perf)
